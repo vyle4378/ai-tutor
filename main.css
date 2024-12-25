@@ -1,0 +1,64 @@
+.input-space {
+  font-family: Arial;
+  font-size: 14px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgb(236, 236, 236);
+}
+
+.problem-box,
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.problem-box .input-space,
+.problem-box .enter-button,
+.chat-box .gpttext,
+.chat-box .input-space {
+  border: 1px solid rgb(150, 148, 148);
+  border-radius: 5px;
+}
+
+.problem-box .input-space {
+  resize: vertical;
+  min-width: 500px;
+  min-height: 50px;
+  max-height: 150px;
+}
+.problem-box .enter-button {
+  width: 60px;
+  height: 25px;
+  margin: 12px;
+  background-color: rgb(236, 236, 236);
+  cursor: pointer;
+}
+.problem-box .enter-button:hover {
+  background-color: rgb(208, 208, 208);
+}
+.problem-box .enter-button:active {
+  background-color: rgb(175, 174, 174);
+}
+
+
+.middle-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.middle-section .whiteboard-box {
+  background-color: lightblue;
+}
+
+.chat-box .gpttext {
+  width: 250px;
+  height: 300px;
+}
+.chat-box .input-space {
+  resize: none;
+  min-width: 230px;
+  min-height: 50px;
+  max-height: 80px; 
+}
