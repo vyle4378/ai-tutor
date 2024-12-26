@@ -5,24 +5,26 @@ let drawing = false;
 
 const getCoordinates = (e) => {
     if (e.touches) {
-        const touch = e.touchs[0];
+        const touch = e.touches[0];
         const rect = canvas.getBoundingClientRect();
         return {x : touch.clientX - rect.left, y : touch.clientY - rect.top};
     }
-    return {x : offsetX, y: e.offsetY}
+    return {x : e.offsetX, y: e.offsetY};
 };
 
 const startDrawing = (e) => {
     drawing = true;
+    const {x, y} = getCoordinates(e);
     ctx.beginPath();
-    ctx.moveTo(e.offsetX, e.offsetY);
+    ctx.moveTo(x, y);
 }
 
 const draw = (e) => {
     if (!drawing) return;
-    ctx.lineTo(e.offsetX, e.offsetY);
-    // ctx.strokeStyle = "black"; // Set stroke color
-    // ctx.lineWidth = 2;        // Set line width
+    const {x, y} = getCoordinates(e);
+    ctx.lineTo(x, y);
+    ctx.strokeStyle = "black"; // Set stroke color
+    ctx.lineWidth = 1;        // Set line width
     ctx.stroke();
 }
 
