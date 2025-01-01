@@ -70,7 +70,7 @@
   width: 250px;
   height: 380px;
   font-family: Arial;
-  font-size: 14px;
+  font-size: 14px;;
 }
 
 .chat-box .input-space {
@@ -92,7 +92,7 @@
   height: 300px;
 }
 
-.chat-out {
+.user-message {
   display: flex;
   background-color: pink;
   padding: 0px 10px;
