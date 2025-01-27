@@ -2,68 +2,106 @@
 <html>
   <head>
     <title>Main Page (v0)</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="whiteboard.css">
+		<link rel="stylesheet" href="chatbox.css">
+		<link rel="stylesheet" href="feedback.css">
+
     <script defer src="whiteboard.js"></script>
-    <script defer src="index.js"></script>
+    <script defer src="chatbox.js"></script>
+    <script defer src="feedback.js"></script>
   </head>
+
   <body>
-    <main>
-      <section class="top-section">
-        <div class="problem-box">
-          <textarea class="input-space" placeholder="Insert your problem here..."></textarea>
-          <!-- todolater: add ability to upload files/images -->
-          <button class="enter-button">Run</button>
-        </div>
-      </section>
+    <main class="main-container">
 
-      <section class="middle-section">
-        <div class="whiteboard-box">
+      <div class="work-section">
+
+				<div class="whiteboard-box">
           <canvas id="whiteboard" class="whiteboard"
-            height="380"
-            width="500"
-            ></canvas>
-          <!-- todolater: draw (diff colors), erase (pixel, object), clear all, laser
+            height="500px"
+            width="500px"
+          ></canvas>
+
+					<div class="whiteboard-toolbar">
+						<div id="color-buttons" class="color-buttons">
+							<button class="color-btn active" data-color="#000000" style="background-color: black"></button>
+							<button class="color-btn" data-color="#ff0000" style="background-color: red"></button>
+							<button class="color-btn" data-color="#0000ff" style="background-color:blue"></button>
+							<button class="color-btn" data-color="#008000" style="background-color: green"></button>
+						</div>
+						<button class="eraser-btn">Erase</button>
+						<button class="clear-btn">Clear</button>
+						<button class="check-answer-btn">Check Answer</button>
+					</div>
+          <!-- todolater: undo/redo, erase (pixel, object), laser
               eventually: highlight, shape, images -->
-        </div>
-        <div class="chat-box">
-          <div class="gpttext-container">
-            <div class="header">Chatbot Logo + Name
-              <div class="chat-logo">LOGO</div>
-            </div>
-            <div class="chat-area">
-              <!-- todo: localStorage & JSON to save html  -->
-              <div class="chat-messages bot-message">
-                <!-- todolater: add bot avatar -->
-                <p>(in) Hello. How can I help you .....
-                </p>
-              </div>
-              <div class="chat-messages user-message">
-                <p>(out) blah blah blah
-                  blah blah blah
-                  blah blah blah
-                  blah blah blah
-                  blah blah blah
-                  blah blah blah
-                </p>
-              </div>
-              <div class="chat-messages bot-message">
-                <!-- todolater: add thinking indicator 15:11 / 1:11:23 -->
-                <p>(in) Hello. How can I help you .....
-                </p>
-              </div>
-              
-            </div>
-            
+				</div>
 
+			</div>
 
-          </div>
+			<div class="feedback-section">
+					<div class="header">
+						Feedback Area
+					</div>
+	
+<!-- todo: solve the problem in the whiteboard area. once done, click the check answer button. If you don't know what to do, click "Hint" or "Learn"
+-->
 
+					<div class="feedback-area">
+						<div class="feedback-item correct"> 
+							blah blah blah
+						</div>
+						
+						<div class="feedback-item incorrect"> 
+							blah blah blah
+						</div>
 
-          <textarea class="input-space" placeholder="Message tutor..."></textarea>
-          <button class="enter-button">Enter</button>
-        </div>
-      </section>
+					</div>
+
+			</div>
+			
+		</main>
+
+		<div>
+			<div class="screenshot-container">hi</div>
+		</div>
+
+		<div class="chat-section">
+			<div class="chat-box">
+
+				<div class="gpttext-container">
+					<div class="header">Chatbot Logo + Name
+						<div class="chat-logo">LOGO</div>
+					</div>
+					<div class="chat-area">
+						<!-- todo: localStorage & JSON to save html  -->
+						<div class="chat-messages bot-message">
+							<!-- todolater: add bot avatar -->
+							<p>(in) Hello. How can I help you .....
+							</p>
+						</div>
+						<div class="chat-messages user-message">
+							<p>(out) blah blah blah
+								blah blah blah
+								blah blah blah
+								blah blah blah
+								blah blah blah
+								blah blah blah
+							</p>
+						</div>
+						<div class="chat-messages bot-message">
+							<!-- todolater: add thinking indicator 15:11 / 1:11:23 -->
+							<p>(in) Hello. How can I help you .....
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<textarea class="input-space" placeholder="Message tutor..."></textarea>
+				<button class="enter-button">Enter</button>
+			</div>
+		</div>
       
-    </main>
+
   </body>
 </html>

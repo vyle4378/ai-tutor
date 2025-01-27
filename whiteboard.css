@@ -1,0 +1,93 @@
+/* size change for ipad and iphone screens
+  use @media queries */
+
+.main-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin: 50px;
+	gap: 20px;
+}
+
+.whiteboard-box .whiteboard {
+    border: 1px solid rgb(150, 148, 148);
+    border-radius: 5px;
+}
+
+.whiteboard-box {
+	position: relative;  /* This is important for absolute positioning of children */
+}
+
+.whiteboard {
+	cursor: crosshair;
+}
+
+.whiteboard-toolbar {
+	position: absolute;
+	bottom: 15px;      /* Distance from bottom */
+	left: 20px;        /* Distance from left */
+	background-color: rgba(240, 240, 240, 0.9);  /* Semi-transparent background */
+	padding: 8px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  display: flex;
+  align-items: center;
+	gap: 15px;
+}
+
+/* color buttons */
+.color-buttons {
+	display: inline-flex;
+	gap: 8px;
+}
+.color-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s;
+}
+.color-btn:hover,
+.eraser-btn:hover,
+.clear-btn:hover,
+.check-answer-btn:hover {
+    transform: scale(1.1);
+}
+
+.eraser-btn,
+.clear-btn,
+.check-answer-btn {
+	padding: 5px 16px;
+	border: 2px solid black;
+	border-radius: 4px;
+	cursor: pointer;
+	background-color: white;
+	transition: all 0.2s;
+}
+.color-btn.active,
+.eraser-btn.active,
+.check-answer-btn.active {
+    border: 2px solid #333;
+    transform: scale(1.1);
+}
+
+.clear-btn {
+	background-color: rgb(255, 163, 163);
+	color: black;
+	border: 2px solid black;
+}
+
+.check-answer-btn {
+	background-color: rgb(132, 218, 132);
+	color: black;
+}
+  
+
+  
+  
+  
+  
+  
