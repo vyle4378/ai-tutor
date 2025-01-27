@@ -47,7 +47,7 @@ async function handleAnswerCheck() {
 async function getFeedback() {
     try {
         const prompt = `Identify whether the student solved the problem right or wrong. Don't worry about significant figures.`;
-        takeScreenshot();
+        const imageData = takeScreenshot();
         console.log("imageData", imageData);
 
         const response = await fetch(API_URL, {
@@ -69,7 +69,7 @@ async function getFeedback() {
                             {
                                 type: 'image_url',
                                 image_url: {
-                                    url: '/Users/vyle/Downloads/screenshot.png'
+                                    url: ''
                                 }
                             }
                         ]
