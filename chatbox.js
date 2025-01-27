@@ -2,7 +2,7 @@ const chatAreaElem = document.querySelector('.chat-area')
 let chatMessagesHTML = chatAreaElem.innerHTML
 const chatBoxElem = document.querySelector('.gpttext-container')
 const API_URL = 'https://api.openai.com/v1/chat/completions'
-const API_KEY = ''
+// const API_KEY = ''
 
 
 // problem-box
