@@ -1,6 +1,12 @@
+const bgCanvas = document.getElementById("bg-canvas");
+const bgCtx = bgCanvas.getContext("2d");
+bgCtx.fillStyle = "white";
+bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
+
 const canvas = document.getElementById("whiteboard");
 const ctx = canvas.getContext("2d");
-const problemText = "How many moles of gas occupy 98 L at a pressure of 2.8 atmospheres and a temperature of 292 K?";
+
+// const problemText = "How many moles of gas occupy 98 L at a pressure of 2.8 atmospheres and a temperature of 292 K?";
 
 const colorBtns = document.querySelectorAll('.color-btn');
 const eraserBtn = document.querySelector('.eraser-btn');
@@ -50,7 +56,7 @@ function drawProblemText(text) {
 }
 
 // Call this function with your problem text
-drawProblemText(problemText);
+// drawProblemText(problemText);
 
 
 
@@ -128,5 +134,4 @@ eraserBtn.addEventListener('click', () => {
 // Clear button functionality
 clearBtn.addEventListener('click', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawProblemText(problemText);
 });

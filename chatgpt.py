@@ -1,24 +1,37 @@
 from openai import OpenAI
+import base64
 
-# Set your API key
-# client = OpenAI(api_key="")
+#set apikey
+client = OpenAI()
 
-def chat_with_gpt(prompt):
-    try:
-        # Create a chat completion
-        response = client.chat.completions.create(
-            messages=[{"role": "user", "content": prompt}],
-            model="gpt-4",  
-        )
-        # Extract and return the response text
-        return response.choices[0].message.content.strip()
-    
-    except Exception as e:
-        return f"An error occurred: {str(e)}"
+def encode_image(image_path):
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode('utf-8')
 
-# Example usage
-if __name__ == "__main__":
-    prompt = "What is Python?"
-    response = chat_with_gpt(prompt)
-    print(f"ChatGPT: {response}")
+image_path = 'test.png'
+image_base64 = encode_image(image_path)
 
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", 
+               "content": [
+                    {
+                        "type": "text", 
+                        "text": 'prompt: Tierra inflated her basketball indoors at 31.7°C to a pressure of 23.8 psi. She then placed it in her car, which was at 3.0°C. When she arrived at school, the ball felt flat. What is the new pressure of the basketball?'
+                    },
+                    {
+                        "type": "text", 
+                        "text": "Look at the image and tell me if the student solved the problem correctly or not. What did they do wrong?"
+                    },
+                    {
+                        "type": "image_url", 
+                        "image_url": {
+                            "url": f"data:image/png;base64,{image_base64}",
+                            "detail": "low"
+                        }
+                    }
+                ]
+               }],
+)
+
+print(image_base64)

@@ -3,108 +3,67 @@ console.log("feedback.js loaded");
 const checkAnswerBtn = document.querySelector('.check-answer-btn');
 const feedbackArea = document.querySelector('.feedback-area');
 checkAnswerBtn.addEventListener('click', handleAnswerCheck);
+const screenshotContainer = document.querySelector('.screenshot-container');
 
+import { OpenAI } from 'https://cdn.skypack.dev/openai@4.x';  // Use CDN version
 
-function takeScreenshot() {
-    // Get canvas image as base64 string
-    const base64String = canvas.toDataURL('image/png');
-
-    // Convert Base64 to Blob
-    const byteCharacters = atob(base64String.split(",")[1]);
-    const byteNumbers = new Array(byteCharacters.length).fill().map((_, i) => byteCharacters.charCodeAt(i));
-    const byteArray = new Uint8Array(byteNumbers);
-    const blob = new Blob([byteArray], { type: "image/png" }); // Change to "image/jpeg" for JPEG
-
-    // Save Blob as a file
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "screenshot.png"; 
-    link.click();
-
-    // // extra
-    // const screenshotContainer = document.querySelector('.screenshot-container');
-    // screenshotContainer.innerHTML = ''; 
-    // screenshotContainer.innerHTML = `<img src="/Users/vyle/Downloads/screenshot.png" alt="Screenshot">`;
-
-    // console.log("base64String", base64String);
-    // return base64String;
-}
+const openai = new OpenAI({
+    //apikey
+});
 
 
 async function handleAnswerCheck() {
     try {
         console.log("checking answer");
         // Get feedback from GPT
-        const feedback = await getFeedback(prompt);
+        const feedback = await getFeedback();
         // Display the feedback
         renderFeedback(feedback);
     } catch (error) {
-        console.error('Error checking answer:', error);
         renderFeedback('Sorry, there was an error analyzing your work. Please try again.');
     }
 }
 
-async function getFeedback() {
-    try {
-        const prompt = `Identify whether the student solved the problem right or wrong. Don't worry about significant figures.`;
-        const imageData = takeScreenshot();
-        console.log("imageData", imageData);
+async function getFeedback() {;
+    const base64_image = takeScreenshot();
 
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${API_KEY}`
-            },
-            body: JSON.stringify({
-                model: 'gpt-4o',
-                messages: [
-                    {
-                        role: 'user',
-                        content: [
-                            {
-                                type: 'text',
-                                text: prompt
-                            },
-                            {
-                                type: 'image_url',
-                                image_url: {
-                                    url: ''
-                                }
-                            }
-                        ]
-                    }
-                ],
-                max_tokens: 300
-            })
-        });
+    const response = await openai.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [
+            {'role': 'user', 'content': [
+                {'type': 'text', 'text': 'Prompt: How many moles of gas occupy 98 L at a pressure of 2.8 atm and a temperature of 292 K?'},
+                {'type': 'text', 'text': 'Look at the image and tell me if the student has solved the problem correctly. Be concise'},
+                {'type': 'image_url', 'image_url': {"url": `${base64_image}`, 'detail': 'low'}}
+            ]
+            }
+        ]
+    });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log(data.choices[0].message.content);
-        return data.choices[0].message.content;
-
-    } catch (error) {
-        console.error('API Error:', error);
-        throw error;
-    }
+    console.log(response.choices[0].message.content);
+    return response.choices[0].message.content;
 }
 
 function renderFeedback(feedbackText) {
     // Clear previous feedback
     feedbackArea.innerHTML = '';
     
-    // Create new feedback element
-    const feedbackElement = document.createElement('div');
-    feedbackElement.className = 'feedback-item';
-    
     // Convert the feedback text to HTML with line breaks
     const formattedFeedback = feedbackText.replace(/\n/g, '<br>');
-    feedbackElement.innerHTML = formattedFeedback;
-    
-    // Add to feedback area
-    feedbackArea.appendChild(feedbackElement);
+    feedbackArea.innerHTML = formattedFeedback;
+    MathJax.typeset()
 } 
+
+
+function takeScreenshot() {
+    const mergedCanvas = document.createElement('canvas');
+    mergedCanvas.width = bgCanvas.width;
+    mergedCanvas.height = bgCanvas.height;
+    const mergedCtx = mergedCanvas.getContext('2d');
+    mergedCtx.drawImage(bgCanvas, 0, 0);
+    mergedCtx.drawImage(canvas, 0, 0);
+
+
+    const base64_image = mergedCanvas.toDataURL('image/png');
+    screenshotContainer.innerHTML = `<img src="${base64_image}" alt="Screenshot">`;
+    return base64_image;
+}

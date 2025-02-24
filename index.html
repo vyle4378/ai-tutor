@@ -6,23 +6,35 @@
 		<link rel="stylesheet" href="chatbox.css">
 		<link rel="stylesheet" href="feedback.css">
 
-    <script defer src="whiteboard.js"></script>
-    <script defer src="chatbox.js"></script>
-    <script defer src="feedback.js"></script>
+	<script type="text/javascript" async
+	src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script type="text/javascript" async
+	src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+	<script defer src="whiteboard.js"></script>
+    <script defer type="module" src="feedback.js"></script>
   </head>
 
   <body>
     <main class="main-container">
 
-      <div class="work-section">
+      	<div class="work-section">
 
-				<div class="whiteboard-box">
-          <canvas id="whiteboard" class="whiteboard"
-            height="500px"
-            width="500px"
-          ></canvas>
-
-					<div class="whiteboard-toolbar">
+			<div class="whiteboard-box" style="position: relative; width: 500px; height: 500px;">
+			<div class="canvas-container">
+				<canvas id="bg-canvas"
+					height="500px"
+					width="500px"
+					style="position: absolute; z-index: 1;"
+				></canvas>
+				<canvas id="whiteboard" class="whiteboard"
+					height="500px"
+					width="500px"
+					style="position: absolute; z-index: 2;"
+				></canvas>
+			</div>
+			
+					<div class="whiteboard-toolbar" style="position: absolute; z-index: 3;">
 						<div id="color-buttons" class="color-buttons">
 							<button class="color-btn active" data-color="#000000" style="background-color: black"></button>
 							<button class="color-btn" data-color="#ff0000" style="background-color: red"></button>
@@ -33,34 +45,34 @@
 						<button class="clear-btn">Clear</button>
 						<button class="check-answer-btn">Check Answer</button>
 					</div>
-          <!-- todolater: undo/redo, erase (pixel, object), laser
-              eventually: highlight, shape, images -->
-				</div>
-
+			<!-- todolater: undo/redo, erase (pixel, object), laser
+				eventually: highlight, shape, images -->
 			</div>
 
-			<div class="feedback-section">
-					<div class="header">
-						Feedback Area
-					</div>
+	  	</div>
+
+		<div class="feedback-section">
+			<div class="header">
+				Feedback Area
+			</div>
 	
 <!-- todo: solve the problem in the whiteboard area. once done, click the check answer button. If you don't know what to do, click "Hint" or "Learn"
 -->
 
-					<div class="feedback-area">
-						<div class="feedback-item correct"> 
-							blah blah blah
-						</div>
-						
-						<div class="feedback-item incorrect"> 
-							blah blah blah
-						</div>
-
-					</div>
+			<div class="feedback-area">
+				<div class="feedback-item correct"> 
+					blah blah blah
+				</div>
+				
+				<div class="feedback-item incorrect"> 
+					blah blah blah
+				</div>
 
 			</div>
+
+		</div>
 			
-		</main>
+	</main>
 
 		<div>
 			<div class="screenshot-container">hi</div>
