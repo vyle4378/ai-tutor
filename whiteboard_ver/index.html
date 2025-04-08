@@ -3,21 +3,32 @@
   <head>
     <title>Main Page (v0)</title>
     <link rel="stylesheet" href="whiteboard.css">
-		<link rel="stylesheet" href="chatbox.css">
-		<link rel="stylesheet" href="feedback.css">
-
-	<script type="text/javascript" async
-	src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<link rel="stylesheet" href="feedback.css">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
 	<script type="text/javascript" async
 	src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
 	<script defer src="whiteboard.js"></script>
     <script defer type="module" src="feedback.js"></script>
+
+	<style>
+        mjx-container {
+            display: inline !important;
+            white-space: nowrap;
+        }
+    </style>
   </head>
 
   <body>
+	<div class="problem-text">How many moles of gas occupy 98 L at a pressure of 2.8 atmospheres and a temperature of 292 K?</div>
     <main class="main-container">
-
       	<div class="work-section">
 
 			<div class="whiteboard-box" style="position: relative; width: 500px; height: 500px;">
@@ -61,11 +72,11 @@
 
 			<div class="feedback-area">
 				<div class="feedback-item correct"> 
-					blah blah blah
+					Correct!
 				</div>
 				
 				<div class="feedback-item incorrect"> 
-					blah blah blah
+					Not quite.
 				</div>
 
 			</div>
@@ -73,47 +84,14 @@
 		</div>
 			
 	</main>
+	<!-- <div class="rubric-container">
+		<textarea class="rubric-textarea" placeholder="Enter rubric here..." rows="7" cols="100"></textarea>
 
-		<div>
-			<div class="screenshot-container">hi</div>
-		</div>
+	</div> -->
+	<!-- <div>
+		<div class="screenshot-container">screenshot area</div>
+	</div> -->
 
-		<div class="chat-section">
-			<div class="chat-box">
-
-				<div class="gpttext-container">
-					<div class="header">Chatbot Logo + Name
-						<div class="chat-logo">LOGO</div>
-					</div>
-					<div class="chat-area">
-						<!-- todo: localStorage & JSON to save html  -->
-						<div class="chat-messages bot-message">
-							<!-- todolater: add bot avatar -->
-							<p>(in) Hello. How can I help you .....
-							</p>
-						</div>
-						<div class="chat-messages user-message">
-							<p>(out) blah blah blah
-								blah blah blah
-								blah blah blah
-								blah blah blah
-								blah blah blah
-								blah blah blah
-							</p>
-						</div>
-						<div class="chat-messages bot-message">
-							<!-- todolater: add thinking indicator 15:11 / 1:11:23 -->
-							<p>(in) Hello. How can I help you .....
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<textarea class="input-space" placeholder="Message tutor..."></textarea>
-				<button class="enter-button">Enter</button>
-			</div>
-		</div>
-      
 
   </body>
 </html>

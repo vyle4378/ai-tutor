@@ -1,3 +1,11 @@
+.rubric-textarea {
+	font-size: 12px;
+	font-family: Arial;
+    resize: none;
+    justify-content: center;
+}
+
+
 .feedback-section {
     border: 1px solid rgb(150, 148, 148);
     border-radius: 5px;
@@ -16,17 +24,12 @@
     margin: 15px;
 }
 
-.feedback-area {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow-y: auto;
-}
 .feedback-item {
     display: block;
     color: black;
     padding: 10px;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 .feedback-item.incorrect {
     background-color: rgb(255, 163, 163);

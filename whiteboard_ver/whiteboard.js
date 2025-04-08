@@ -1,3 +1,5 @@
+const problemText = "How many moles of gas occupy 98 L at a pressure of 2.8 atmospheres and a temperature of 292 K?";
+
 const bgCanvas = document.getElementById("bg-canvas");
 const bgCtx = bgCanvas.getContext("2d");
 bgCtx.fillStyle = "white";
@@ -5,8 +7,6 @@ bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
 
 const canvas = document.getElementById("whiteboard");
 const ctx = canvas.getContext("2d");
-
-// const problemText = "How many moles of gas occupy 98 L at a pressure of 2.8 atmospheres and a temperature of 292 K?";
 
 const colorBtns = document.querySelectorAll('.color-btn');
 const eraserBtn = document.querySelector('.eraser-btn');
@@ -22,14 +22,15 @@ ctx.lineWidth = 1;        // Set line width
 
 // Function to wrap text and draw it on canvas
 function drawProblemText(text) {
-    const maxWidth = canvas.width - 40; // 20px padding on each side
+    // Draw the problem text on the background canvas
+    const maxWidth = bgCanvas.width - 40; // 20px padding on each side
     const lineHeight = 22;
     const x = 20;
     let y = 30;
 
-    ctx.font = '16px Arial';
-    ctx.fillStyle = '#000000';
-    
+    bgCtx.font = '16px Arial';
+    bgCtx.fillStyle = '#000000';
+
     // Split text into words
     const words = text.split(' ');
     let line = '';
@@ -38,11 +39,11 @@ function drawProblemText(text) {
     for (let word of words) {
         // Try adding the word to the line
         const testLine = line + word + ' ';
-        const metrics = ctx.measureText(testLine);
+        const metrics = bgCtx.measureText(testLine);
         
         // If the line would be too long, draw the current line and start a new one
         if (metrics.width > maxWidth && line !== '') {
-            ctx.fillText(line, x, y);
+            bgCtx.fillText(line, x, y);
             line = word + ' ';
             y += lineHeight;
         } else {
@@ -52,12 +53,11 @@ function drawProblemText(text) {
     }
     
     // Draw the last line
-    ctx.fillText(line, x, y);
+    bgCtx.fillText(line, x, y);
 }
 
 // Call this function with your problem text
 // drawProblemText(problemText);
-
 
 
 const getCoordinates = (e) => {
@@ -115,6 +115,8 @@ colorBtns.forEach(button => {
         eraserBtn.classList.remove('active');
         // Add active class to clicked button
         button.classList.add('active');
+
+        ctx.globalCompositeOperation = 'source-over';
         // Update stroke color
         ctx.lineWidth = 1;
         ctx.strokeStyle = button.dataset.color;
@@ -127,11 +129,12 @@ eraserBtn.addEventListener('click', () => {
     erasing = true;
     eraserBtn.classList.add('active');
     colorBtns.forEach(btn => btn.classList.remove('active'))
-    ctx.strokeStyle = "white";
+    ctx.globalCompositeOperation = 'destination-out'
     ctx.lineWidth = 10;
 });
 
 // Clear button functionality
 clearBtn.addEventListener('click', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    strokes = []; // Clear the strokes array
 });

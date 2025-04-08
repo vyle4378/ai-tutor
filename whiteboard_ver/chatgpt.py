@@ -1,8 +1,8 @@
 from openai import OpenAI
 import base64
 
-#set apikey
-client = OpenAI()
+API_KEY = ''
+client = OpenAI(api_key=API_KEY)
 
 def encode_image(image_path):
     with open(image_path, "rb") as image_file:
@@ -34,4 +34,4 @@ response = client.chat.completions.create(
                }],
 )
 
-print(image_base64)
+print(response)
